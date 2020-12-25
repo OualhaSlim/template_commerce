@@ -1,0 +1,12 @@
+version: '2'
+services:
+  commerce_platform-postgresql:
+    image: postgres:12.3
+    # volumes:
+    #     - ~/volumes/jhipster/commerce_platform/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=commerce_platform
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432

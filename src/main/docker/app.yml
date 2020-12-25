@@ -1,0 +1,22 @@
+version: '2'
+services:
+  commerce_platform-app:
+    image: commerce_platform
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://commerce_platform-postgresql:5432/commerce_platform
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://commerce_platform-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://commerce_platform-elasticsearch:9200
+    ports:
+      - 8080:8080
+  commerce_platform-postgresql:
+    extends:
+      file: postgresql.yml
+      service: commerce_platform-postgresql
+  commerce_platform-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: commerce_platform-elasticsearch
